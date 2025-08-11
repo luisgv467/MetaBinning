@@ -1,0 +1,2 @@
+cluster: "bsub.py --threads {cluster.nCPU} --queue {cluster.queue} {cluster.mem} {cluster.project}"
+cluster-config: "config/lfs_cluster.json"

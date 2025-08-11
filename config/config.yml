@@ -1,0 +1,48 @@
+# Required arguments
+
+#List of input files
+input:
+    "/data/pam/lg21g/scratch/Programs/snakemake/MetaBinning/metagenome_paths.txt"
+
+#Path to assemblies
+assembly:
+    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Assembly/"
+
+#Path to clean reads
+reads:
+    "/data/pam/lg21g/scratch/random/PT_sputum_samples/clean_paired_reads/"
+
+#Path to store alignments
+alignment:
+    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning/Alignment/"
+
+#Path to store 10k-contigs
+10k-contigs:
+   "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning/10K-contigs/"
+
+#Path to store metabat2 results
+metabat2:
+    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning/MetaBat2/"
+
+#Path to store concoct results
+concoct:
+    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning/Concoct/"
+
+concoct-final:
+    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning/Concoct-final/"
+
+#Path to store maxbin2 results
+maxbin2:
+    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning/MaxBin2/"
+
+#Path to store semibin2 results
+semibin2:
+    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning/SemiBin2/"
+
+#Final output of the bins
+output:
+    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning/All_bins/"
+
+#checkM output
+checkM:
+    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning/CheckM/"

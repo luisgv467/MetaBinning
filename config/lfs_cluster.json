@@ -1,0 +1,70 @@
+__default__:
+    queue: "normal"
+    project: "snakemake_test"
+    mem: 5
+    nCPU: 1
+
+minimap2_align:
+  queue: "normal"
+  project: "minimap2"
+  mem: 10
+  nCPU: 6
+
+cut_concoct_10K:
+  queue: "normal"
+  project: "10k_cut"
+  mem: 4
+  nCPU: 1
+
+index_and_depth_calc:
+  queue: "normal"
+  project: "index_depth"
+  mem: 4
+  nCPU: 1
+
+depth_calc_concoct:
+  queue: "normal"
+  project: "depth_calc_concoct"
+  mem: 4
+  nCPU: 1
+
+maxbin2:
+  queue: "normal"
+  project: "maxbin2"
+  mem: 12
+  nCPU: 8
+
+metabat2:
+  queue: "normal"
+  project: "metabat2"
+  mem: 12
+  nCPU: 8
+
+concoct:
+  queue: "normal"
+  project: "concoct"
+  mem: 30
+  nCPU: 16
+
+semibin2:
+  queue: "normal"
+  project: "semibin2"
+  mem: 30
+  nCPU: 16
+
+checkM:
+  queue: "normal"
+  project: "checkM"
+  mem: 150
+  nCPU: 24
+
+end:
+  queue: "normal"
+  project: "end"
+  mem: 1
+  nCPU: 1
+
+
+
+
+
