@@ -1,4 +1,4 @@
-__default__:
+_default__:
     queue: "normal"
     project: "snakemake_test"
     mem: 5
@@ -13,58 +13,53 @@ minimap2_align:
 cut_concoct_10K:
   queue: "normal"
   project: "10k_cut"
-  mem: 4
+  mem: 1
   nCPU: 1
 
 index_and_depth_calc:
   queue: "normal"
   project: "index_depth"
-  mem: 4
+  mem: 1
   nCPU: 1
 
 depth_calc_concoct:
   queue: "normal"
   project: "depth_calc_concoct"
-  mem: 4
+  mem: 1
   nCPU: 1
 
 maxbin2:
   queue: "normal"
   project: "maxbin2"
-  mem: 12
-  nCPU: 8
+  mem: 2
+  nCPU: 2
 
 metabat2:
   queue: "normal"
   project: "metabat2"
-  mem: 12
-  nCPU: 8
+  mem: 3
+  nCPU: 2
 
 concoct:
   queue: "normal"
   project: "concoct"
-  mem: 30
-  nCPU: 16
+  mem: 2
+  nCPU: 4
 
 semibin2:
   queue: "normal"
   project: "semibin2"
-  mem: 30
-  nCPU: 16
+  mem: 23
+  nCPU: 8
 
 checkM:
   queue: "normal"
   project: "checkM"
-  mem: 150
-  nCPU: 24
+  mem: 40
+  nCPU: 4
 
 end:
   queue: "normal"
   project: "end"
   mem: 1
   nCPU: 1
-
-
-
-
-
