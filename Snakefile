@@ -298,7 +298,7 @@ rule end:
     shell:
         """
         #Eliminate the alignment files that we will not need anymore
-        #rm {params.alignment}{params.sample}*
-        #rm {params.assembly_10k}
+        rm {params.alignment}{params.sample}*
+        rm {params.assembly_10k}
         touch {output.done}
         """
