@@ -10,6 +10,12 @@ INPUT = config["input"]
 with open(INPUT) as f:
     SAMPLES = [line.strip() for line in f if line.strip()]
 
+TECH = config["tech"]
+MINIMAP2_PRESETS = {
+    "Illumina": "sr",
+    "ONT": "map-ont",
+    "PacBio": "map-pb"
+}
 READS = config["reads"]
 ASSEMBLY = config["assembly"]
 ALIGNMENT = config["alignment"]
@@ -19,7 +25,6 @@ MAXBIN2 = config["maxbin2"]
 SEMIBIN2 = config["semibin2"]
 CONTIGS_10K = config["10k-contigs"]
 CONCOCT_FINAL = config["concoct-final"]
-CHECKM = config["checkM"]
 OUTPUT = config["output"]
 
 ###### Protocol ######
@@ -29,20 +34,28 @@ rule all:
         expand("{sample}-all_done.txt", sample = SAMPLES)
         
 rule minimap2_align:
-    input:
+    params:
         assembly = ASSEMBLY + "{sample}.fa",
         fwd = READS + "{sample}_1.fastq.gz",
-        rev = READS + "{sample}_2.fastq.gz"
+        rev = READS + "{sample}_2.fastq.gz", 
+	tech = TECH,
+	preset = MINIMAP2_PRESETS[TECH]
     output:
         bam = ALIGNMENT + "{sample}-sorted.bam", 
         flag = "{sample}-align_done.txt"
     conda:
         "envs/metabinning.yaml"
     shell:
-        """
-        minimap2 -ax sr -t 6 {input.assembly} {input.fwd} {input.rev} | \
-        samtools view -bS -@ 6 | \
-        samtools sort -@ 6 -o {output.bam}
+        """ 
+        if [ {params.tech} = "Illumina" ]; then
+            minimap2 -ax {params.preset} -t 6 {params.assembly} {params.fwd} {params.rev} | \
+            samtools view -bS -@ 6 | \
+            samtools sort -@ 6 -o {output.bam}
+        else
+            minimap2 -ax {params.preset} -t 6 {params.assembly} {params.fwd} | \
+            samtools view -bS -@ 6 | \
+            samtools sort -@ 6 -o {output.bam}
+        fi
         touch {output.flag}
         """
 
@@ -121,7 +134,7 @@ rule maxbin2:
         -contig {input.assembly} \
         -abund {input.depth} \
         -out {params.maxbin2} \
-        -thread 8
+        -thread 2
         
         # Ensure final output directory exists
         mkdir -p {params.final_output}
@@ -160,7 +173,7 @@ rule metabat2:
         -i {input.assembly} \
         -a {input.depth} \
         -o {params.metabat2} \
-        -t 8
+        -t 2
         
         # Ensure final output directory exists
         mkdir -p {params.final_output}
@@ -201,7 +214,7 @@ rule concoct:
 	concoct \
         --composition_file {input.assembly_10k} \
         --coverage_file {input.depth} \
-        -t 16 \
+        -t 4 \
         -b {params.bins} 
         
         #Merge subcontigs
@@ -250,7 +263,7 @@ rule semibin2:
         --self-supervised \
         -i {input.assembly} \
         -b {input.bam} \
-        --threads 16 \
+        --threads 4 \
         -o {params.semibin2}
 
         # Ensure final output directory exists
@@ -268,47 +281,24 @@ rule semibin2:
         rm -r {params.semibin2}
         
         touch {output.flag}
-        """
+        """  
 
-rule checkM: 
+rule end:
     input:
         semibin2 = "{sample}-semibin2-done.txt",
         concoct = "{sample}-concoct-done.txt",
         metabat2 = "{sample}-metabat2-done.txt",
         maxbin2 = "{sample}-maxbin2-done.txt"
     params:
-        final_output = directory(OUTPUT + "{sample}/"),
         alignment = directory(ALIGNMENT),
         sample = "{sample}", 
-	assembly_10k = CONTIGS_10K + "{sample}_10K.fasta"
-    output:
-        checkM = directory(CHECKM + "{sample}"), 
-        flag = "{sample}-checkM-done.txt"
-    shell:
-        """
-        #Eliminate the alignment files that we will not need anymore
-        rm {params.alignment}{params.sample}*
-	rm {params.assembly_10k}
-
-	#Create the output directory
-	mkdir -p {output.checkM}
-
-        checkm lineage_wf \
-	-x fa \
-	-t 24 \
-	--tab_table \
-	--quiet \
-	{params.final_output} \
-	{output.checkM} > {output.checkM}/checkm_quality_summary.tsv
-        touch {output.flag}
-        """   
-
-rule end:
-    input:
-        checkM = "{sample}-checkM-done.txt"
+        assembly_10k = CONTIGS_10K + "{sample}_10K.fasta"
     output:
         done = "{sample}-all_done.txt"
     shell:
         """
+        #Eliminate the alignment files that we will not need anymore
+        #rm {params.alignment}{params.sample}*
+        #rm {params.assembly_10k}
         touch {output.done}
         """
