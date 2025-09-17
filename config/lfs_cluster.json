@@ -1,4 +1,4 @@
-_default__:
+__default__:
     queue: "normal"
     project: "snakemake_test"
     mem: 5
@@ -7,7 +7,7 @@ _default__:
 minimap2_align:
   queue: "normal"
   project: "minimap2"
-  mem: 10
+  mem: 30
   nCPU: 6
 
 cut_concoct_10K:
@@ -25,7 +25,7 @@ index_and_depth_calc:
 depth_calc_concoct:
   queue: "normal"
   project: "depth_calc_concoct"
-  mem: 1
+  mem: 5
   nCPU: 1
 
 maxbin2:
@@ -43,7 +43,7 @@ metabat2:
 concoct:
   queue: "normal"
   project: "concoct"
-  mem: 2
+  mem: 5
   nCPU: 4
 
 semibin2:
@@ -63,3 +63,8 @@ end:
   project: "end"
   mem: 1
   nCPU: 1
+
+
+
+
+
