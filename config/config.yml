@@ -6,43 +6,48 @@ input:
 
 #Path to assemblies
 assembly:
-    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Assembly/"
+    "/data/pam/lg21g/scratch/chapters/chapter_1/Resp_microbiome_db/Assembly-long/Polished/"
 
 #Path to clean reads
 reads:
-    "/data/pam/lg21g/scratch/random/PT_sputum_samples/clean_paired_reads/"
+    "/data/pam/lg21g/scratch/chapters/chapter_1/Resp_microbiome_db/clean_long_reads/"
 
 #Path to store alignments
 alignment:
-    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning/Alignment/"
+    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning-ONT/Alignment/"
 
 #Path to store 10k-contigs
 10k-contigs:
-   "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning/10K-contigs/"
+   "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning-ONT/10K-contigs/"
 
 #Path to store metabat2 results
 metabat2:
-    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning/MetaBat2/"
+    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning-ONT/MetaBat2/"
 
 #Path to store concoct results
 concoct:
-    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning/Concoct/"
+    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning-ONT/Concoct/"
 
 concoct-final:
-    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning/Concoct-final/"
+    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning-ONT/Concoct-final/"
 
 #Path to store maxbin2 results
 maxbin2:
-    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning/MaxBin2/"
+    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning-ONT/MaxBin2/"
 
 #Path to store semibin2 results
 semibin2:
-    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning/SemiBin2/"
+    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning-ONT/SemiBin2/"
 
 #Final output of the bins
 output:
-    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning/All_bins/"
+    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning-ONT/All_bins/"
 
 #checkM output
 checkM:
-    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning/CheckM/"
+    "/data/pam/lg21g/scratch/random/PT_sputum_samples/Binning-ONT/CheckM/"
+
+#Sequencing technology: choose one of Illumina, ONT, PacBio
+#tech: "Illumina"
+tech: "ONT"
+#tech: "PacBio"
